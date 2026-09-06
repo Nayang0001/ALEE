@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi amor ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      margin-bottom: 8px;
+      text-align: center;
+      color: #ff9ecb;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .subtitle {
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+      text-align: center;
+      color: #ffb6d9;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ff9ecb;
+      color: #ff9ecb;
+      padding: 12px 22px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .tab-btn.active {
+      color: white;
+    }
+
+    /* Colores de botones activos */
+    .tab-btn[data-tab="minecraft"].active {
+      background: #5a8f3d;
+      border-color: #5a8f3d;
+    }
+
+    .tab-btn[data-tab="valorant"].active {
+      background: #ff4655;
+      border-color: #ff4655;
+    }
+
+    .tab-btn[data-tab="reppo"].active {
+      background: #c77dff;
+      border-color: #c77dff;
+    }
+
+    .tab-btn[data-tab="pregunta"].active {
+      background: #d63384;
+      border-color: #d63384;
+    }
+
+    .content {
+      border-radius: 25px;
+      padding: 35px 30px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.45s ease;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 480px;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    /* Capa oscura para que se lea bien el texto */
+    .content::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      z-index: 0;
+    }
+
+    .content>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .game-title {
+      font-size: 1.9rem;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+    }
+
+    .game-desc {
+      font-size: 1.15rem;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .hearts {
+      font-size: 2rem;
+      margin: 14px 0;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    .code-block {
+      background: rgba(20, 20, 30, 0.92);
+      color: #cdd6f4;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      text-align: left;
+      padding: 20px 22px;
+      border-radius: 14px;
+      margin: 18px auto;
+      line-height: 1.55;
+      max-width: 540px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .code-block .comment {
+      color: #6c7086;
+    }
+
+    .code-block .keyword {
+      color: #cba6f7;
+    }
+
+    .code-block .string {
+      color: #a6e3a1;
+    }
+
+    .code-block .function {
+      color: #89b4fa;
+    }
+
+    .code-block .variable {
+      color: #f38ba8;
+    }
+
+    .code-block .number {
+      color: #fab387;
+    }
+
+    .code-block .success {
+      color: #a6e3a1;
+      font-weight: bold;
+    }
+
+    .proposal {
+      font-size: 1.55rem;
+      margin: 12px 0 8px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      font-size: 1.15rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-yes {
+      background: #d63384;
+      color: white;
+      box-shadow: 0 8px 22px rgba(214, 51, 132, 0.5);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.07);
+      background: #c2256b;
+    }
+
+    .btn-no {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-no:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    #celebration {
+      display: none;
+      margin-top: 28px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    #celebration .success-msg {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: #ff9ecb;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .emoji-big {
+      font-size: 3.4rem;
+      margin: 12px 0;
+    }
+
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: floatUp 3.8s linear forwards;
+      font-size: 24px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(720deg) scale(0.25);
+        opacity: 0;
+      }
+    }
+
+    /* ========== FONDOS CON CARPETA assets/ ========== */
+
+    /* Minecraft */
+    #minecraft {
+      background-image: url('assets/minecraft.jpg');
+      color: #e8f5e9;
+    }
+
+    #minecraft .game-title {
+      color: #a5d6a7;
+    }
+
+    #minecraft .hearts {
+      filter: drop-shadow(0 0 8px #81c784);
+    }
+
+    /* Valorant */
+    #valorant {
+      background-image: url('assets/valorant.jpg');
+      color: #ffebee;
+    }
+
+    #valorant .game-title {
+      color: #ff8a80;
+    }
+
+    #valorant .hearts {
+      filter: drop-shadow(0 0 8px #ff4655);
+    }
+
+    /* Reppo */
+    #reppo {
+      background-image: url('assets/reppo.jpg');
+      color: #f3e5f5;
+    }
+
+    #reppo .game-title {
+      color: #e1bee7;
+    }
+
+    #reppo .hearts {
+      filter: drop-shadow(0 0 8px #ce93d8);
+    }
+
+    /* Pregunta final */
+    #pregunta {
+      background-image: url('assets/asaaa.jpg');
+      color: #ffe6f0;
+    }
+
+    #pregunta .game-title {
+      color: #ff9ecb;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Para mi cielito, mi chica que con tan poco de conocernos siento que nos conocemos mucho 💕</h1>
+  <p class="subtitle">Abre las pestañas… cada una es un pedacito de mi corazón</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="minecraft" onclick="openTab('minecraft')">Minecraft ❤️</button>
+    <button class="tab-btn" data-tab="valorant" onclick="openTab('valorant')">Valorant 💘</button>
+    <button class="tab-btn" data-tab="reppo" onclick="openTab('reppo')">Reppo 🌸</button>
+    <button class="tab-btn" data-tab="pregunta" onclick="openTab('pregunta')">💍 pregunta 💍</button>
+  </div>
+
+  <!-- Minecraft -->
+  <div id="minecraft" class="content active">
+    <div class="emoji-big">⛏️💕</div>
+    <h2 class="game-title">Minecraft</h2>
+    <p class="game-desc">
+      En este mundo no construiremos casas sino…
+      construiremos un vínculo juntos.<br>
+      Tú eres mi bloque favorito, el que hace que todo tenga sentido.<br>
+      Aunque el mundo se reinicie mil veces, siempre te elegiría a ti.
+    </p>
+    <div class="hearts">⛏️ ❤️ ⛏️</div>
+    <p>¿Quieres craftar una vida a mi lado?</p>
+  </div>
+
+  <!-- Valorant -->
+  <div id="valorant" class="content">
+    <div class="emoji-big">🔫💖</div>
+    <h2 class="game-title">Valo nuestro juego</h2>
+    <p class="game-desc">
+      Mi amor Aquí no hay ranked… solo hay “tú y yo”.<br>
+      Eres mi duo perfecto, mi spike y yo tu *plantando*,
+      la razón por la que siempre me divierto.<br>
+      Si el mundo fuera un mapa, yo sería el wallhack para encontrarte mi vida.
+    </p>
+    <div class="hearts">💘 💘 💘</div>
+    <p>¿Aceptas ser mi compañera de equipo para siempre?💘</p>
+  </div>
+
+  <!-- Reppo -->
+  <div id="reppo" class="content">
+    <div class="emoji-big">🌸✨</div>
+    <h2 class="game-title">Reppo</h2>
+    <p class="game-desc">
+      En este juego inventado solo existen misiones de abrazos,
+      recompensas de besos y logros de “hacerte sonreír”.<br>
+      Tú eres el personaje principal…
+      y yo solo quiero ser tu a loooov aloovvv alov alov.
+    </p>
+    <div class="hearts">🌸 💕 🌸</div>
+    <p>¿Quieres compartir tus sustos y risas conmigo?</p>
+  </div>
+
+  <!-- Pregunta final -->
+  <div id="pregunta" class="content">
+    <div class="emoji-big">💍💻</div>
+    <h2 class="game-title">propuesta.js</h2>
+
+    <div class="code-block">
+      <span class="comment">// propuesta.js</span><br>
+      <span class="keyword">const</span> <span class="variable">miCorazon</span> = {<br>
+      &nbsp;&nbsp;<span class="variable">dueña</span>: <span class="string">null</span>,<br>
+      &nbsp;&nbsp;<span class="variable">amor</span>: <span class="number">Infinity</span><br>
+      };<br><br>
+
+      <span class="keyword">function</span> <span class="function">quieresSerMiNovia</span>() {<br>
+      &nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"¿Sí?"</span>;<br>
+      }<br><br>
+
+      <span class="comment">// Ejecutar función...</span><br>
+      <span class="variable">miCorazon</span>.<span class="variable">dueña</span> = <span
+        class="function">quieresSerMiNovia</span>();
+    </div>
+
+    <p class="proposal">¿Quieres ser mi novia?</p>
+    <p style="font-size: 1.12rem; margin-bottom: 6px;">
+      No hay más bugs, no hay más excepciones…<br>
+      solo esta línea de código que lleva todo mi corazón.
+    </p>
+
+    <div class="buttons">
+      <button class="btn btn-yes" onclick="decirSi()">return true; 💖</button>
+      <button class="btn btn-no" onclick="decirNo()">return false;</button>
+    </div>
+
+    <div id="celebration">
+      <div class="emoji-big">🎉🥰💻🎉</div>
+      <div class="success-msg">¡COMMIT EXITOSO!</div>
+
+      <div class="code-block">
+        <span class="comment">// resultado.js</span><br>
+        <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"¡Ahora eres
+          oficialmente mi novia!"</span>);<br>
+        <span class="variable">miCorazon</span>.<span class="variable">dueña</span> = <span
+          class="string">"tú"</span>;<br>
+        <span class="variable">status</span> = <span class="string">"en una relación hermosa"</span>;<br><br>
+        <span class="success">// Te amo demasiado mi vida ❤️</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Música -->
+  <audio id="musicaAmor" src="assets/musica.mp3" preload="auto"></audio>
+
+  <script>
+    function openTab(tabName) {
+      document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    function decirSi() {
+      document.getElementById('celebration').style.display = 'block';
+
+      // Reproducir música
+      const audio = document.getElementById('musicaAmor');
+      audio.currentTime = 0;
+      audio.volume = 0.75;
+      audio.play().catch(err => {
+        console.log("Error al reproducir la música:", err);
+        alert("No se pudo reproducir la música.\nVerifica que el archivo esté en: assets/musica.mp3");
+      });
+
+      // Corazones
+      for (let i = 0; i < 55; i++) {
+        setTimeout(() => crearCorazon(), i * 30);
+      }
+    }
+
+    function decirNo() {
+      alert("return false;\n\nEstá bien… el programa seguirá corriendo esperándote 💕\nCuando quieras, vuelve a ejecutar return true; ❤️");
+    }
+
+    function crearCorazon() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerHTML = ['❤️', '💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 6)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 22 + 18) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+  </script>
+</body>
+
+</html>
